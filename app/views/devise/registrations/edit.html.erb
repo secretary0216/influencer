@@ -1,0 +1,71 @@
+<div class="signup">
+<h3>Edit <%= resource_name.to_s.humanize %></h3>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= devise_error_messages! %>
+
+
+  <div class="field">
+    <%= f.label :nickname,"ニックネーム(8文字まで)" %><br />
+    <%= f.text_field :nickname, placeholder: 'ニックネーム', autofocus: true, maxlength: "10" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :twitter_account,"Twitterアカウント名(@除く)" %><em></em><br />
+    <%= f.text_field :twitter_account, placeholder: 'Twitterアカウントの@を除いた値', autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :image,"ユーザー画像" %><em></em><br />
+    <%= f.text_field :image, placeholder: '画像のURLを入力して下さい', autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true %>
+  </div>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :password %> <i>(変更しない場合は空欄)</i><br />
+    <%= f.password_field :password, autocomplete: "off" %>
+    <% if @minimum_password_length %>
+      <br />
+      <em><%= @minimum_password_length %> 文字以上必要です。</em>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation,"パスワード再確認" %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :current_password,"現在のパスワード" %> <i>(変更する場合は入力が必要です。)</i><br />
+    <%= f.password_field :current_password, autocomplete: "off" %>
+  </div>
+
+  <div class="field">
+      <%= f.label :introduce,"自己紹介文(140字以内)" %><br />
+    <%= f.text_field :introduce, placeholder: '自己紹介を140字以内で記述して下さい。', autofocus: true, maxlength: "140", size: "70" %>
+  </div>
+
+  <div class="field">
+      <%= f.label :tag_list, "インフルエンサーとしての強み(スキル・興味関心)※カンマ区切り" %><br>
+    <%= text_field_tag 'user[tag_list]', @user.tag_list.join(',') %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Update" %>
+  </div>
+<% end %>
+
+<!-- 退会機能 -->
+<h3>退会希望はこちら</h3>
+
+<p><%= button_to "退会する", registration_path(resource_name), data: { confirm: "本当に退会しますか？" }, method: :delete %></p>
+
+</div>

@@ -1,0 +1,35 @@
+<center>
+<div id="css-slider">
+  <div class="slider-wrapper">
+    <div class="slide-item"><img src="<%= asset_path "influencertitle-01.png" %>"/></div>
+    <div class="slide-item"><img src="<%= asset_path "influencertitle-02.png" %>"/></div>
+    <div class="slide-item"><img src="<%= asset_path "influencertitle-03.png" %>"/></div>
+  </div>
+</div>
+</center>
+
+
+<h4>新着インフルエンサーの紹介</h4>
+<div class = "user">
+  <% @users.each do |user| %>
+    <%= render 'users/tag_list', tag_list: user.tag_list %>
+    <a href="/users/<%= user.id %>"><img src="<%= user.image %>" class="userimg"/></a>
+    <div class="intro"><%= user.introduce %></div>
+
+      <div class="twitter-logo"><a href="https://twitter.com/<%= user.twitter_account %>"><img src="<%= asset_path "twitter.png" %>"/>
+        <div class="nickname"><%= user.nickname %></a></div>
+      </div>
+
+    <center><div class="twitterinfo">
+      <div class="follower"><%= user.get_followers %> Follower</div>
+      <div class="tweet"><%= user.get_tweets %> Tweets</div>
+    </div></center>
+
+    <a href="/users/<%= user.id %>">
+      <button class="buttonA"><p>More Info</p></button>
+    </a>
+  <% end -%>
+</div>
+
+<center class="paginate"><%= paginate @users %></center>
+

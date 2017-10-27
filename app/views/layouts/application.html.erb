@@ -1,14 +1,56 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Influencer</title>
+  <title>Influencer.com</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
-</head>
-<body>
-"ゴリラ"
-<%= yield %>
 
+<!-- 10月8日試しに追加 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=10.0, user-scalable=yes">
+<title>Influencer.com</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link rel="stylesheet" media="all" type="text/css" href="application.css" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+</head>
+
+
+<body>
+  <header>
+  <div class="header-logo">
+    <%= link_to '/users' do %><img src="<%= asset_path "influsence-logo.png" %>"/><% end %>
+  </div>
+  <div class="header2">
+    <div class="login-out">
+      <% if user_signed_in? %>
+      <span class="user-nickname"><%= current_user.nickname %>さん</span>
+      <%= link_to "検索",'/users/search', :class => 'square_btn'%>
+      <a href="/users/<%= current_user.id %>"><div class="square_btn">マイページ</div></a>
+      <%= link_to "ログアウト", destroy_user_session_path, method: :delete, :class => 'square_btn'%>
+      <% else %>
+      <span class="user-nickname">ようこそ　　</span>
+      <%= link_to "検索",'/users/search', :class => 'square_btn'%>
+      <%= link_to "ログイン", new_user_session_path, :class => 'square_btn'%>
+      <%= link_to "新規登録", new_user_registration_path, :class => 'square_btn'%>
+      <% end %>
+    </div>
+  </div>
+  </header>
+
+
+
+
+  <div id="contents">
+
+    <%= yield %>
+
+  </div>
+
+  <footer>
+<p>ROJU Co.,Ltd 2017</p>
+  </footer>
 </body>
 </html>

@@ -1,0 +1,36 @@
+<div class="search">
+  <p>インフルエンサーの興味・関心・スキルを検索</p>
+  <%= form_tag('/users/search', method: :get) do %>
+    <dl class="search1">
+      <dt><input class="search__query" name="keyword" type="text" value="" placeholder="キーワードで検索" /></dt>
+      <dd><button class="btn-search" title="検索" type="submit"><span>検索</span></button></input></dd>
+    </dl>
+  <% end %>
+</div>
+
+<div class="result">
+  <h4><%= @keyword %>を強みとするインフルエンサー</h4>
+  <div class = "user">
+    <% @users.each do |user| %>
+      <%= render 'users/tag_list', tag_list: user.tag_list %>
+      <a href="/users/<%= user.id %>"><img src="<%= user.image %>" class="userimg"/></a>
+      <div class="intro"><%= user.introduce %></div>
+
+        <div class="twitter-logo"><a href="https://twitter.com/<%= user.twitter_account %>"><img src="<%= asset_path "twitter.png" %>"/>
+          <div class="nickname"><%= user.nickname %></a></div>
+        </div>
+
+      <center><div class="twitterinfo">
+        <div class="follower"><%= user.get_followers %> Follower</div>
+        <div class="tweet"><%= user.get_tweets %> Tweets</div>
+      </div></center>
+
+      <a href="/users/<%= user.id %>">
+        <button class="buttonA"><p>More Info</p></button>
+      </a>
+    <% end -%>
+  </div>
+
+</div>
+<%= paginate @users %>
+

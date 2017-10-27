@@ -1,0 +1,24 @@
+
+<% if user_signed_in? &&  @user.id == current_user.id %>
+<a href="/users/edit"><button class="buttonB"><p>編集する</p></button></a>
+<% end -%>
+
+
+<div class = "user">
+    <%= render 'users/tag_list', tag_list: @user.tag_list %>
+    <img src="<%= @user.image %>" class="userimg"/>
+    <div class="intro"><%= @user.introduce %></div>
+
+      <div class="twitter-logo"><a href="https://twitter.com/<%= @user.twitter_account %>"><img src="<%= asset_path "twitter.png" %>"/>
+        <div class="nickname"><%= @user.nickname %></a></div>
+      </div>
+
+    <center><div class="twitterinfo">
+      <div class="follower"><%= @user.get_followers %> Follower</div>
+      <div class="tweet"><%= @user.get_tweets %> Tweets</div>
+    </div></center>
+
+    <a href="">
+      <button class="buttonC"><p>コンタクトを取る</p></button>
+    </a>
+</div>

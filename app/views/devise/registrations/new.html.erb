@@ -1,0 +1,55 @@
+<div class ="signup">
+  <h3>新規登録</h3>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= devise_error_messages! %>
+
+    <div class="field">
+      <%= f.label :nickname,"ニックネーム(8文字まで)" %><br />
+      <%= f.text_field :nickname, autofocus: true, maxlength: "8" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :twitter_account,"Twitterアカウント名(@除く)" %><em></em><br />
+      <%= f.text_field :twitter_account, placeholder: 'Twitterアカウントの@を除いた値', autofocus: true %>
+    </div>
+
+    <div class="field">
+      <%= f.label :image,"ユーザー画像" %><em></em><br />
+      <%= f.text_field :image, placeholder: '画像のURLを入力して下さい', autofocus: true %>
+    </div>
+
+    <div class="field">
+      <%= f.label :email %><br />
+      <%= f.email_field :email, autofocus: true %>
+    </div>
+
+    <div class="field">
+      <%= f.label :password,"パスワード" %>
+      <% if @minimum_password_length %>
+      <em>(<%= @minimum_password_length %> 文字以上必要です。)</em>
+      <% end %><br />
+      <%= f.password_field :password, autocomplete: "off" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :password_confirmation,"パスワード再確認" %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "off" %>
+    </div>
+    <div class="field">
+      <%= f.label :introduce,"自己紹介文(140字以内)" %><br />
+      <%= f.text_field :introduce, placeholder: '自己紹介を140字以内で記述して下さい。', autofocus: true, maxlength: "140", size: "70" %>
+    </div>
+
+  <!-- タグ -->
+   　<div class="field">
+      <%= f.label :tag_list, "インフルエンサーとしての強み(スキル・興味関心)※カンマ区切り" %><br>
+      <%= text_field_tag 'user[tag_list]', @user.tag_list.join(','), placeholder: '例:アイドル,政治' %>
+    </div>
+
+    <div class="actions">
+      <p><%= f.submit "新規登録" %></p>
+    </div>
+  <% end %>
+
+</div>
+

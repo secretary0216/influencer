@@ -1,4 +1,21 @@
 Rails.application.routes.draw do
+
+root  'users#index'
+devise_for :users
+resources :users do
+  collection do
+    get :search
+  end
+end
+
+
+#   devise_for :users
+# get 'users' => 'users#index'
+
+# get 'new' => 'user#login'
+# get 'login' => 'user#login'
+# get 'login' => 'user#login'
+# get 'login' => 'user#login'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
